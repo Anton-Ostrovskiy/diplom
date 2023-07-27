@@ -7,22 +7,32 @@ import { useState } from "react";
 import "./NavPanel.scss";
 
 const NavPanel = () => {
-    const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState<boolean>(false);
 
-    const onChangeIsActive = () => {
-        setIsActive(!isActive);
-    }
+  const onChangeIsActive = () => {
+    setIsActive(!isActive);
+  };
   return (
     <>
       <h2>Name bank</h2>
       <div className="wrapper-menu">
         <Link to={Routes.Home}>
-          <Button variant={ isActive ? "text" : "contained"} startIcon={<WidgetsIcon />} onClick={() => onChangeIsActive()}>
+          <Button
+            sx={{ width: 200, display: "flex", justifyContent: "flex-start" }}
+            variant={isActive ? "text" : "contained"}
+            startIcon={<WidgetsIcon />}
+            onClick={() => onChangeIsActive()}
+          >
             Home
           </Button>
         </Link>
         <Link to={Routes.Transactions}>
-          <Button variant={ isActive ? "text" : "contained"} startIcon={<SyncAltIcon />} onClick={() => onChangeIsActive()}>
+          <Button
+            sx={{ width: 200, display: "flex", justifyContent: "flex-start" }}
+            variant={isActive ? "text" : "contained"}
+            startIcon={<SyncAltIcon />}
+            onClick={() => onChangeIsActive()}
+          >
             Transactions
           </Button>
         </Link>

@@ -2,8 +2,11 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import NavPanel from "./NavPanel";
 import "./styles.scss";
+import { useState } from "react";
+import Modal from "./Modal";
 
 const Root = () => {
+  
   return (
     <div className="wrapper">
       <aside
@@ -23,6 +26,7 @@ const Root = () => {
         <main>
           <Outlet />
         </main>
+        
       </div>
     </div>
   );

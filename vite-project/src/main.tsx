@@ -6,6 +6,8 @@ import Root from './layout';
 import { Routes } from './constants/Routes';
 import Home from './pages/Home';
 import Transactions from './pages/Transactions';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
 ]);
 
 root.render(
-  // <Provider store={store}>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  // </Provider>
+  </Provider>
 );
