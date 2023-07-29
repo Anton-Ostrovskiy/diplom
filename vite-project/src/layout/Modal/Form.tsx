@@ -1,39 +1,59 @@
-import { Field, Formik } from "formik";
+import { Field, Formik, Form as FormikForm } from "formik";
 import { DefaultTextField } from "../../components/DefaultTextField";
 import { Button } from "@mui/material";
-// import { addUsers, removeUsers } from "../../store/reducers/transactions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addTransaction } from "../../store/reducers/transactions";
+import * as Yup from "yup";
 
-const Form = () => {
+interface IProps {
+  closeModal: () => void;
+}
+
+const FormSchema = Yup.object().shape({
+  description: Yup.string(),
+  category: Yup.string().required("Required"),
+  money_spent: Yup.number().required("Required"),
+  type: Yup.string().required("Required"),
+});
+
+const Form = ({ closeModal }: IProps) => {
 
   const dispatch = useDispatch();
 
-  const handleAddTransaction = () => {
-    const newTransaction = { id: '1', date: '2021-01-01', amount: 100 };
+  const handleAddTransaction = (values: {
+    description: string;
+    category: string;
+    money_spent: string;
+    type: string;
+  }) => {
+    console.log(values);
+    const newTransaction = {
+      id: Date.now(),
+      date: new Date(),
+      amount: +values.money_spent,
+      type: values.type,
+      description: values.description,
+      category: values.category,
+      money_spent: values.money_spent,
+    };
     dispatch(addTransaction(newTransaction));
+
+    closeModal();
   };
-
-  // const addUser = (user: string) => {
-  //   dispatch(addUsers(user));
-  // };
-
-  // const removeUser = (user: string) => {
-  //   dispatch(removeUsers(user));
-  // };
 
   return (
     <>
       <Formik
         initialValues={{
           description: "",
-          category: "taxi",
+          category: "",
           money_spent: "",
           type: "",
         }}
-        onSubmit={() => {}}
+        validationSchema={FormSchema}
+        onSubmit={handleAddTransaction}
       >
-        <form style={{display: "flex", flexDirection: "column", gap: 15}}>
+        <FormikForm style={{display: "flex", flexDirection: "column", gap: 15}}>
           <div style={{display: "flex", gap: 15, marginBottom: 20}}>
             <label >Category</label>
             <Field as="select" name="category">
@@ -46,15 +66,15 @@ const Form = () => {
             </Field>
             <label >Type</label>
             <Field as="select" name="type">
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
+              <option value="revenue">Revenue</option>
+              <option value="expenses">Expenses</option>
             </Field>
           </div>
 
           <DefaultTextField label="Description" name="description" />
           <DefaultTextField label="money spent" name="money_spent" />
-          <Button variant={"contained"} onClick={handleAddTransaction}>Add</Button>
-        </form>
+          <Button variant={"contained"} type="submit">Add</Button>
+        </FormikForm>
       </Formik>
     </>
   );

@@ -19,7 +19,7 @@ const NavPanel = () => {
         <Link to={Routes.Home}>
           <Button
             sx={{ width: 200, display: "flex", justifyContent: "flex-start" }}
-            variant={isActive ? "text" : "contained"}
+            variant={location.pathname === Routes.Home ? "contained" : "text"}
             startIcon={<WidgetsIcon />}
             onClick={() => onChangeIsActive()}
           >
@@ -29,7 +29,7 @@ const NavPanel = () => {
         <Link to={Routes.Transactions}>
           <Button
             sx={{ width: 200, display: "flex", justifyContent: "flex-start" }}
-            variant={isActive ? "text" : "contained"}
+            variant={location.pathname === Routes.Transactions ? "contained" : "text"}
             startIcon={<SyncAltIcon />}
             onClick={() => onChangeIsActive()}
           >

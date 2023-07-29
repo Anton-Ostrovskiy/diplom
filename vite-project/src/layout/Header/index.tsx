@@ -14,7 +14,7 @@ const Header = () => {
     .format(new Date())
     .replace(/(\s?\г\.?)/, "");
 
-    const [modalActive, setModalActive] = useState(true)
+    const [modalActive, setModalActive] = useState(false)
 
 
 

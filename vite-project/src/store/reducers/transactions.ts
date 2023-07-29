@@ -1,8 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface ITransaction {
-    id: string;
+    id: number;
     amount: number;
+    date: Date;
+    type: string;
+    description: string;
+    category: string;
+    money_spent: string;
 }
 
 const usersDefaultState: ITransaction[] = [];
@@ -23,4 +28,3 @@ export const transactionSlice  = createSlice({
 
 export const transactionReducer = transactionSlice.reducer
 export const {addTransaction} = transactionSlice.actions
-// export const {removeUsers} = usersSlice.actions
