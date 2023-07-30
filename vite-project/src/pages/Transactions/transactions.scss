@@ -1,10 +1,13 @@
+* {
+    margin: 0;
+}
 .transactiots{
     display: flex;
     flex-direction: column;
     margin: 0 15px;
     max-width: 100%;
     
-    &__wrap {
+    &__wrap__withfullwidth {
         border: none;
         border-radius: 15px;
         background: #fff;
@@ -12,11 +15,23 @@
         height: 600px;
         padding: 0 15px;
     }
+    &__wrap__notfullwidth {
+        border: none;
+        border-radius: 15px;
+        background: #fff;
+        max-width: 100%;
+        height: 200px;
+        padding: 10px 15px;
+    }
 
 }
 
 .transactiots p{
     width: 100px;
     text-align: center;
+}
+.transactiots h2{
+    margin: 0;
+    margin-bottom: 20px;
 }
 

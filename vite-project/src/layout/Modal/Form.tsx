@@ -1,9 +1,11 @@
 import { Field, Formik, Form as FormikForm } from "formik";
 import { DefaultTextField } from "../../components/DefaultTextField";
 import { Button } from "@mui/material";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { addTransaction } from "../../store/reducers/transactions";
 import * as Yup from "yup";
+import { useEffect } from "react";
+import { RootState } from "../../store";
 
 interface IProps {
   closeModal: () => void;
@@ -12,34 +14,46 @@ interface IProps {
 const FormSchema = Yup.object().shape({
   description: Yup.string(),
   category: Yup.string().required("Required"),
-  money_spent: Yup.number().required("Required"),
+  amount: Yup.number().required("Required"),
   type: Yup.string().required("Required"),
 });
 
 const Form = ({ closeModal }: IProps) => {
+
+  // const transactions = useSelector((state: RootState) => state.transaction);
 
   const dispatch = useDispatch();
 
   const handleAddTransaction = (values: {
     description: string;
     category: string;
-    money_spent: string;
+    amount: string;
     type: string;
   }) => {
     console.log(values);
     const newTransaction = {
       id: Date.now(),
-      date: new Date(),
-      amount: +values.money_spent,
+      date: new Date().toLocaleDateString(),
+      amount: +values.amount,
       type: values.type,
       description: values.description,
       category: values.category,
-      money_spent: values.money_spent,
     };
     dispatch(addTransaction(newTransaction));
 
     closeModal();
   };
+
+  // useEffect(() => {
+  //   const storedTransactions = localStorage.getItem('transactions');
+  //   if (storedTransactions) {
+  //     dispatch(addTransaction(JSON.parse(storedTransactions)));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem('transactions', JSON.stringify(transactions));
+  // }, [transactions]);
 
   return (
     <>
@@ -47,7 +61,7 @@ const Form = ({ closeModal }: IProps) => {
         initialValues={{
           description: "",
           category: "",
-          money_spent: "",
+          amount: "",
           type: "",
         }}
         validationSchema={FormSchema}
@@ -72,7 +86,7 @@ const Form = ({ closeModal }: IProps) => {
           </div>
 
           <DefaultTextField label="Description" name="description" />
-          <DefaultTextField label="money spent" name="money_spent" />
+          <DefaultTextField label="Amount" name="amount" />
           <Button variant={"contained"} type="submit">Add</Button>
         </FormikForm>
       </Formik>

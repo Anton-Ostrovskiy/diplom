@@ -3,11 +3,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface ITransaction {
     id: number;
     amount: number;
-    date: Date;
+    date: string;
     type: string;
     description: string;
     category: string;
-    money_spent: string;
 }
 
 const usersDefaultState: ITransaction[] = [];
