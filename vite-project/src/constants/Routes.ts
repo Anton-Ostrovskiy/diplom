@@ -1,4 +1,5 @@
 export enum Routes {
-    Home = "/",
-    Transactions = "/transactions",
-  }
+  Home = "/",
+  Transactions = "/transactions",
+  CardSettings = "/cardSettings"
+}

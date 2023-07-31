@@ -26,6 +26,11 @@
         align-items: center;
 
     }
+    &__content{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 .container {
@@ -38,9 +43,9 @@
 .container h2 {
     margin-bottom: 20px;
 }
-.circle{
+.card__circle{
     position: relative;
-    z-index: 10000;
+    z-index: 1;
     &::before {
         content: "";
         display: block;
@@ -69,4 +74,16 @@
         mix-blend-mode: hard-light;
         z-index: -100;
     }
+}
+
+.card__settings{
+    position: relative;
+    display: flex;
+    max-width: 100px;
+    justify-content: space-between;
+}
+
+.card__icons__settings {
+    cursor: pointer;
+    text-align: center;
 }

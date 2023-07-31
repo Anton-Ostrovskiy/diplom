@@ -1,4 +1,4 @@
-import { Field, Formik, Form as FormikForm, useFormik } from "formik";
+import { Field, Formik, Form as FormikForm} from "formik";
 import { DefaultTextField } from "../../components/DefaultTextField";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -24,7 +24,7 @@ const Form = ({ closeModal }: IProps) => {
     category: string;
     amount: string;
     type: string;
-  }) => {
+  }, {resetForm}: any) => {
     console.log(values);
     const newTransaction = {
       id: Date.now(),
@@ -35,6 +35,7 @@ const Form = ({ closeModal }: IProps) => {
       category: values.category,
     };
     dispatch(addTransaction(newTransaction));
+    resetForm()
     closeModal();
   };
 
@@ -48,12 +49,6 @@ const Form = ({ closeModal }: IProps) => {
           type: "",
         }}
         validationSchema={FormSchema}
-        // onSubmit={(values, {resetForm}) => {
-        //   resetForm({values: {description: "",
-        //     category: "",
-        //     amount: "",
-        //     type: "",}})
-        // }}
         onSubmit={handleAddTransaction}
       >
         <FormikForm

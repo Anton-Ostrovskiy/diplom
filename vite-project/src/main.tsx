@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Transactions from './pages/Transactions';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import CardSettings from './layout/CardSettings';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -24,7 +25,13 @@ const router = createBrowserRouter([
       },
       {
         path: Routes.Transactions,
-        element: <Transactions />,
+        element: <Transactions withFullWidth={false} />,
+      },
+      {
+        path: Routes.CardSettings,
+        element: <CardSettings onCardSettingsSubmit={function (cardNumber: string, balance: number): void {
+          throw new Error('Function not implemented.');
+        } } />,
       },
     ],
   },

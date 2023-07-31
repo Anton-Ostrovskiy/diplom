@@ -14,9 +14,9 @@ const NavPanel = () => {
   };
   return (
     <>
-      <h2>Name bank</h2>
       <div className="wrapper-menu">
-        <Link to={Routes.Home}>
+        <h2>Name bank</h2>
+        <Link style={{textDecoration: "none"}} to={Routes.Home}>
           <Button
             sx={{ width: 200, display: "flex", justifyContent: "flex-start" }}
             variant={location.pathname === Routes.Home ? "contained" : "text"}
@@ -26,10 +26,12 @@ const NavPanel = () => {
             Home
           </Button>
         </Link>
-        <Link to={Routes.Transactions}>
+        <Link style={{textDecoration: "none"}} to={Routes.Transactions}>
           <Button
             sx={{ width: 200, display: "flex", justifyContent: "flex-start" }}
-            variant={location.pathname === Routes.Transactions ? "contained" : "text"}
+            variant={
+              location.pathname === Routes.Transactions ? "contained" : "text"
+            }
             startIcon={<SyncAltIcon />}
             onClick={() => onChangeIsActive()}
           >
