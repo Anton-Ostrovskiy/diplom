@@ -12,7 +12,7 @@
 
     &__balance {
         align-items: flex-start;
-        border-bottom: solid 1px red;
+        border-bottom: solid 1px #F4F5F7;
     }
 
     &__wraper {
@@ -37,4 +37,36 @@
 
 .container h2 {
     margin-bottom: 20px;
+}
+.circle{
+    position: relative;
+    z-index: 10000;
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 15%;
+        border: solid 1px red;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background: red;
+        mix-blend-mode: hard-light;
+        z-index: -100;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: solid 1px orange;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background: orange;
+        mix-blend-mode: hard-light;
+        z-index: -100;
+    }
 }

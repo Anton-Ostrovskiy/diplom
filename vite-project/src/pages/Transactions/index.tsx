@@ -63,7 +63,8 @@ const Transactions = ({ withFullWidth }: IProps) => {
             style={{
               display: "flex",
               justifyContent: "space-around",
-              borderBottom: "solid 1px red",
+              borderBottom: "solid 1px #F4F5F7",
+              marginBottom: 20,
             }}
           >
             <p>Category</p>
@@ -71,15 +72,16 @@ const Transactions = ({ withFullWidth }: IProps) => {
             <p>Date</p>
             <p>Amount</p>
           </div>
-          <div>
-            <ul style={{ padding: 0 }}>
+          <div style={{}}>
+            <ul className={clsx("transactiots__list__withfullwidth",{ "transactiots__list__notfullwidth" : withFullWidth === false})}>
               {data.map((transaction) => (
                 <li
                   key={transaction.id}
                   style={{
                     display: "flex",
+                    marginBottom: 20,
                     justifyContent: "space-around",
-                    borderBottom: "solid 1px red",
+                    borderBottom: "solid 1px #F4F5F7",
                   }}
                 >
                   <p>{transaction.category}</p>

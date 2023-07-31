@@ -1,3 +1,4 @@
+import Diagram from "../../diagram";
 import Transactions from "../Transactions";
 import "./styles.scss";
 
@@ -16,7 +17,9 @@ const Home = () => {
               <p>1234 1234 1234 1234</p>
             </div>
             <div>
-              <p>MasterCard</p>
+              <p className="circle">
+                MasterCard
+              </p>
               <p>$1,023.45</p>
             </div>
           </div>
@@ -24,6 +27,9 @@ const Home = () => {
       </div>
         <div>
           <Transactions withFullWidth={false} />
+        </div>
+        <div>
+          <Diagram />
         </div>
     </div>
   );

@@ -1,11 +1,9 @@
-import { Field, Formik, Form as FormikForm } from "formik";
+import { Field, Formik, Form as FormikForm, useFormik } from "formik";
 import { DefaultTextField } from "../../components/DefaultTextField";
 import { Button } from "@mui/material";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTransaction } from "../../store/reducers/transactions";
 import * as Yup from "yup";
-import { useEffect } from "react";
-import { RootState } from "../../store";
 
 interface IProps {
   closeModal: () => void;
@@ -13,15 +11,12 @@ interface IProps {
 
 const FormSchema = Yup.object().shape({
   description: Yup.string(),
-  category: Yup.string().required("Required"),
+  category: Yup.string().oneOf(["food", "movie", "taxi", "health", "game", "sport" ]).required("Required"),
   amount: Yup.number().required("Required"),
   type: Yup.string().required("Required"),
 });
 
 const Form = ({ closeModal }: IProps) => {
-
-  // const transactions = useSelector((state: RootState) => state.transaction);
-
   const dispatch = useDispatch();
 
   const handleAddTransaction = (values: {
@@ -40,20 +35,8 @@ const Form = ({ closeModal }: IProps) => {
       category: values.category,
     };
     dispatch(addTransaction(newTransaction));
-
     closeModal();
   };
-
-  // useEffect(() => {
-  //   const storedTransactions = localStorage.getItem('transactions');
-  //   if (storedTransactions) {
-  //     dispatch(addTransaction(JSON.parse(storedTransactions)));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('transactions', JSON.stringify(transactions));
-  // }, [transactions]);
 
   return (
     <>
@@ -65,12 +48,21 @@ const Form = ({ closeModal }: IProps) => {
           type: "",
         }}
         validationSchema={FormSchema}
+        // onSubmit={(values, {resetForm}) => {
+        //   resetForm({values: {description: "",
+        //     category: "",
+        //     amount: "",
+        //     type: "",}})
+        // }}
         onSubmit={handleAddTransaction}
       >
-        <FormikForm style={{display: "flex", flexDirection: "column", gap: 15}}>
-          <div style={{display: "flex", gap: 15, marginBottom: 20}}>
-            <label >Category</label>
+        <FormikForm
+          style={{ display: "flex", flexDirection: "column", gap: 15 }}
+        >
+          <div style={{ display: "flex", gap: 15, marginBottom: 20 }}>
+            <label>Category</label>
             <Field as="select" name="category">
+              <option value="">Please select a category</option>
               <option value="food">Food</option>
               <option value="movie">Movie</option>
               <option value="taxi">Taxi</option>
@@ -78,8 +70,9 @@ const Form = ({ closeModal }: IProps) => {
               <option value="health">Health</option>
               <option value="sport">Sport</option>
             </Field>
-            <label >Type</label>
+            <label>Type</label>
             <Field as="select" name="type">
+              <option value="">Please select a type</option>
               <option value="revenue">Revenue</option>
               <option value="expenses">Expenses</option>
             </Field>
@@ -87,7 +80,9 @@ const Form = ({ closeModal }: IProps) => {
 
           <DefaultTextField label="Description" name="description" />
           <DefaultTextField label="Amount" name="amount" />
-          <Button variant={"contained"} type="submit">Add</Button>
+          <Button variant={"contained"} type="submit">
+            Add
+          </Button>
         </FormikForm>
       </Formik>
     </>
